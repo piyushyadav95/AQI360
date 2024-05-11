@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AQI 360</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul class="sidebar">
+            <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26"
+                        viewBox="0 96 960 960" width="26">
+                        <path
+                            d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
+                    </svg></a></li>
+
+
+            <li><a href="#">About</a></li>
+
+            <li><a href="#">Login</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">AQI 360</a></li>
+
+            <li class="hideOnMobile"><a href="#">About</a></li>
+
+            <li class="hideOnMobile"><a href="#">Login</a></li>
+            <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                        height="26" viewBox="0 96 960 960" width="26">
+                        <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
+                    </svg></a></li>
+        </ul>
+    </nav>
+    <div class="main">
+
+        <!--cards -->
+
+        <div class="card">
+
+            <div class="image">
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Gfp-missouri-st-louis-clubhouse-pond-and-scenery.jpg/1199px-Gfp-missouri-st-louis-clubhouse-pond-and-scenery.jpg">
+            </div>
+            <div class="title">
+                <h1>
+                    Temperature</h1>
+            </div>
+            <div class="des" id="humidity">
+                <h3>12 degree</h3>
+            </div>
+        </div>
+         <!--cards -->
+
+         <div class="card">
+
+            <div class="image">
+                <img src="https://cdn.pixabay.com/photo/2018/01/09/03/49/the-natural-scenery-3070808_1280.jpg">
+            </div>
+            <div class="title">
+                <h1>
+                    Humidity</h1>
+            </div>
+            <div class="des" id="temperature">
+                <h3>33%</h3>
+
+            </div>
+        </div>
+          <!--cards -->
+
+          <div class="card">
+
+            <div class="image">
+                <img src="https://media.istockphoto.com/id/1353967009/photo/sustainable-development-and-green-business-based-on-renewable-energy-reduce-co2-emission.jpg?s=1024x1024&w=is&k=20&c=tJS_yCcptHCj9pCcAbT9Xa3Hoja7I2o_Nx3niuCk5QY=">
+            </div>
+            <div class="title">
+                <h1>
+                    Carbondioxide</h1>
+            </div>
+            <div class="des" id="co2">
+                <p>402 ppm</p>
+
+            </div>
+        </div>
+
+
+        <!--cards -->
+
+        <div class="card">
+
+            <div class="image">
+                <img src="https://st4.depositphotos.com/10409000/40363/i/450/depositphotos_403632914-stock-photo-cloud-dust-particles-floating-air.jpg">
+            </div>
+            <div class="title">
+                <h1>
+                    PM 2.5</h1>
+            </div>
+            <div class="des" id="pm2.5">
+                <p>39 μg/m3</p>
+
+            </div>
+        </div>
+
+          <!--cards -->
+
+          <div class="card">
+
+            <div class="image">
+                <img src="https://img.freepik.com/premium-photo/this-photo-illustration-blue-flame-produced-by-cooking-gas-liquefied-petroleum-gas-lpg-composed-propane-butane-brazil-it-is-widely-used-domestic-industrial-kitchens_68852-173.jpg">
+            </div>
+            <div class="title">
+                <h1>
+                    Butane/Methane </h1>
+            </div>
+            <div class="des" id="butane">
+                <p>No</p>
+
+            </div>            
+        </div>
+        <div class="card">
+
+            <div class="image">
+                <img src="https://1000logos.net/wp-content/uploads/2023/05/face-with-a-happy-smile.png">
+            </div>
+            <div class="title">
+                <h1>
+                    Overall Air Quality </h1>
+            </div>
+            <div class="des" id="butane">
+                <p>Average</p>
+
+            </div>
+ </div>
+   
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCm8WKE6E_SFuYB292W_dWmjZ4-3QBtGxU",
+          authDomain: "aqi-2-fce5a.firebaseapp.com",
+          databaseURL: "https://aqi-2-fce5a-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "aqi-2-fce5a",
+          storageBucket: "aqi-2-fce5a.appspot.com",
+          messagingSenderId: "310556793876",
+          appId: "1:310556793876:web:c0ff04adc8f90ae014db01",
+          measurementId: "G-WSYN0R6QT1"
+        };
+      
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // getting reference to the database
+        var database = firebase.database();
+
+        //getting reference to the data we want
+        var dataRef1 = database.ref('DHT_11/Humidity');
+        var dataRef2 = database.ref('DHT_11/Temperature');
+        // var dataRef3 = database.ref('DHT_11/Humidity');
+        // var dataRef4 = database.ref('DHT_11/Temperature');
+
+        //fetch the data
+        dataRef1.on('value', function(getdata1){
+            var humi = getdata1.val();
+            document.getElementById('temperature').innerHTML = humi + "%";
+        });
+
+        dataRef2.on('value', function(getdata2){
+            var temp = getdata2.val();
+            document.getElementById('humidity').innerHTML = temp + "&#8451;";
+        });
+        // dataRef3.on('value', function(getdata3){
+        //     var co2 = getdata3.val();
+        //     document.getElementById('co2').innerHTML = co2 + "ppm";
+        // });
+
+        // dataRef4.on('value', function(getdata4){
+        //     var butane = getdata4.val();
+        //     document.getElementById('butane').innerHTML = butane ;
+        // });
+    </script>
+</body>
+</html>
